@@ -1,0 +1,109 @@
+✅ What is ALTER Command?
+
+👉 ALTER is used to modify an existing table structure.
+
+You can:
+
+Add column
+
+Delete column
+
+Rename column
+
+Change datatype
+
+Rename table
+
+Add constraints
+
+---------------------------------
+
+🔷 1. ADD COLUMN
+✅ Add a new column to a table
+ALTER TABLE students
+ADD COLUMN age INT;
+
+-------------------------
+
+🔷 2. DROP COLUMN
+✅ Delete a column
+ALTER TABLE students
+DROP COLUMN age;
+
+-----------------------
+
+🔷 3. RENAME COLUMN
+✅ Change column name
+ALTER TABLE students
+RENAME COLUMN name TO student_name;
+
+------------------------------
+
+🔷 4. ALTER COLUMN (Change Data Type)
+✅ Change datatype of a column
+ALTER TABLE students
+ALTER COLUMN age TYPE VARCHAR(3);
+
+-------------------------------------
+
+🔷 5. SET DEFAULT Value
+✅ Set default value for a column
+ALTER TABLE students
+ALTER COLUMN city SET DEFAULT 'Chennai';
+
+------------------------
+
+🔷 6. DROP DEFAULT Value
+ALTER TABLE students
+ALTER COLUMN city DROP DEFAULT;
+
+--------------------------------
+
+🔷 7. SET NOT NULL Constraint
+✅ Make column mandatory
+ALTER TABLE students
+ALTER COLUMN name SET NOT NULL;
+
+------------------------
+
+🔷 8. DROP NOT NULL Constraint
+ALTER TABLE students
+ALTER COLUMN name DROP NOT NULL;  
+
+-----------------------------
+
+🔷 9. ADD CONSTRAINT (Primary Key)
+ALTER TABLE students
+ADD CONSTRAINT students_pk PRIMARY KEY(id);
+
+------------------------------------
+
+🔷 10. DROP CONSTRAINT
+ALTER TABLE students
+DROP CONSTRAINT students_pk;
+
+--------------------------------
+
+🔷 11. RENAME TABLE
+✅ Change table name
+ALTER TABLE students
+RENAME TO student_details;
+
+----------------------------------
+
+📌 Important ALTER Commands Summary
+Command	Use
+ADD COLUMN	Add new column
+DROP COLUMN	Delete column
+RENAME COLUMN	Rename column
+ALTER COLUMN TYPE	Change datatype
+SET DEFAULT	Set default value
+DROP DEFAULT	Remove default
+SET NOT NULL	Make column mandatory
+DROP NOT NULL	Remove mandatory
+ADD CONSTRAINT	Add PK/FK
+DROP CONSTRAINT	Remove constraint
+RENAME TO	Rename table
+
+
+
