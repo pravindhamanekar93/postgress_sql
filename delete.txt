@@ -1,0 +1,78 @@
+✅ What is DELETE Command?
+
+👉 DELETE is used to remove existing rows (records) from a table.
+
+⚠️ It deletes data, not table structure.
+
+🧠 Syntax
+DELETE FROM table_name
+WHERE condition;
+
+
+👉 WHERE decides which rows to delete.
+
+⚠️ If you forget WHERE, all rows will be deleted.
+
+🔷 Example Table: students
+id	name	age	city
+1	Ravi	20	Mumbai
+2	Priya	21	Delhi
+3	John	19	Chennai
+🔷 1️⃣ Delete Single Row
+DELETE FROM students
+WHERE id = 1;
+
+
+👉 Ravi’s record will be deleted.
+
+🔷 2️⃣ Delete Multiple Rows
+DELETE FROM students
+WHERE city = 'Delhi';
+
+
+👉 All students from Delhi will be deleted.
+
+🔷 3️⃣ Delete All Rows ⚠️
+DELETE FROM students;
+
+
+👉 All records deleted
+👉 Table still exists (only data removed)
+
+🔷 4️⃣ DELETE with RETURNING (PostgreSQL Special ⭐)
+DELETE FROM students
+WHERE id = 2
+RETURNING *;
+
+
+👉 Shows deleted row.
+
+🔷 5️⃣ DELETE Using Another Table
+DELETE FROM employees
+USING departments
+WHERE employees.dept_id = departments.id
+AND departments.name = 'HR';
+
+
+👉 Deletes employees from HR department.
+
+📌 Important Points
+Feature	Explanation
+DELETE	Removes rows
+WHERE	Filters rows
+Without WHERE	Deletes all rows
+RETURNING	Shows deleted rows (Postgres feature)
+🔥 Interview Questions
+Q1: Is DELETE DDL or DML?
+
+👉 DML
+
+Q2: Does DELETE remove table structure?
+
+👉 ❌ No. Only data is removed.
+
+🧠 Difference: DELETE vs TRUNCATE vs DROP
+Command	Type	Removes Data	Removes Table
+DELETE	DML	✅ Yes	❌ No
+TRUNCATE	DDL	✅ Yes (All rows)	❌ No
+DROP	DDL	✅ Yes	✅ Yes

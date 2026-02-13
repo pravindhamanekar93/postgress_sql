@@ -1,0 +1,108 @@
+Return the lowest price in the products table:
+
+SELECT MIN(price)
+FROM products;
+-------------------
+
+Set Column Name
+When you use MIN() or MAX(), the returned column will be named min or max by default. To give the column a new name, use the AS keyword.
+
+Example
+Return the lowest price, and name the column lowest_price:
+
+SELECT MIN(price) AS lowest_price
+FROM products;
+
+------------------------
+
+COUNT
+The COUNT() function returns the number of rows that matches a specified criterion.
+
+If the specified criterion is a column name, the COUNT() function returns the number of columns with that name.
+
+-------------------------------
+
+Example
+Return the number of customers from the customers table:
+
+SELECT COUNT(customer_id)
+FROM customers;
+
+-----------------------
+
+
+By specifying a WHERE clause, you can e.g. return the number of customers that comes from London:
+
+Example
+Return the number of customers from London:
+
+SELECT COUNT(customer_id)
+FROM customers
+WHERE city = 'London';
+
+
+------------------------
+
+With 2 Decimals
+The above example returned the average price of all products, the result was 28.8663636363636364.
+
+We can use the ::NUMERIC operator to round the average price to a number with 2 decimals:
+
+Example
+Return the average price of all the products, rounded to 2 decimals:
+
+SELECT AVG(price)::NUMERIC(10,2)
+FROM products;
+
+
+-----------------------------
+
+
+Contains
+To return records that contains a specific letter or phrase, add the % both before and after the letter or phrase.
+
+Example
+Return all customers with a name that contains the letter 'A':
+
+SELECT * FROM customers
+WHERE customer_name LIKE '%A%';
+
+-------------------------------------
+
+Ends with
+To return records that ends with a specific letter or phrase, add the % before the letter or phrase.
+
+Example
+Return all customers with a name that ends with the phrase 'en':
+
+SELECT * FROM customers
+WHERE customer_name LIKE '%en';
+
+----------------------------------------
+
+IN (SELECT)
+You can also use a SELECT statement inside the parenthesis to return all records that are in the result of the SELECT statement.
+
+Example
+Return all customers that have an order in the orders table:
+
+SELECT * FROM customers
+WHERE customer_id IN (SELECT customer_id FROM orders);
+
+--------------------------------------------
+
+NOT IN (SELECT)
+The result in the example above returned 89 records, that means that there are 2 customers that haven't placed any orders.
+
+Let us check if that is correct, by using the NOT IN operator.
+
+Example
+Return all customers that have NOT placed any orders in the orders table:
+
+SELECT * FROM customers
+WHERE customer_id NOT IN (SELECT customer_id FROM orders);
+
+---------------------------------
+
+
+
