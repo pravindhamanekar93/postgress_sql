@@ -1,0 +1,130 @@
+✅ What is UNION?
+
+👉 UNION is used to combine results of two or more SELECT queries.
+
+It merges rows from multiple queries into one result.
+
+🧠 Syntax
+SELECT column1, column2 FROM table1
+UNION
+SELECT column1, column2 FROM table2;
+
+⚠️ Important Rules of UNION
+
+Number of columns must be same
+
+Data types must be same
+
+Column order must be same
+
+🔷 Example 1: Basic UNION
+Table: students_2023
+id	name
+1	Ravi
+2	Priya
+Table: students_2024
+id	name
+3	John
+2	Priya
+Query:
+SELECT name FROM students_2023
+UNION
+SELECT name FROM students_2024;
+
+Output:
+name
+Ravi
+Priya
+John
+
+👉 Duplicate "Priya" is removed automatically.
+
+🔷 UNION ALL (Very Important 🔥)
+
+👉 UNION ALL keeps duplicates.
+
+SELECT name FROM students_2023
+UNION ALL
+SELECT name FROM students_2024;
+
+Output:
+name
+Ravi
+Priya
+John
+Priya
+
+👉 Duplicate is NOT removed.
+
+🧠 Difference: UNION vs UNION ALL
+UNION	UNION ALL
+Removes duplicates	Keeps duplicates
+Slower	Faster
+Uses DISTINCT internally	No duplicate checking
+🔷 Example 2: With Multiple Columns
+SELECT id, name FROM students_2023
+UNION
+SELECT id, name FROM students_2024;
+
+
+👉 Both queries must have same number of columns.
+
+🔷 Example 3: With WHERE Condition
+SELECT name FROM students_2023
+WHERE id > 1
+UNION
+SELECT name FROM students_2024
+WHERE id > 2;
+
+🔷 Example 4: Using ORDER BY
+SELECT name FROM students_2023
+UNION
+SELECT name FROM students_2024
+ORDER BY name;
+
+
+👉 ORDER BY is written at the end.
+
+🔥 Interview Questions
+Q1: What is difference between UNION and JOIN?
+UNION	JOIN
+Combines rows	Combines columns
+Vertical merge	Horizontal merge
+Q2: Is UNION DDL or DML?
+
+👉 It is used with SELECT (DQL – Data Query Language)
+
+🎯 Real-Life Use Case
+
+If you have:
+
+online_customers table
+
+offline_customers table
+
+You can combine them:
+
+SELECT name FROM online_customers
+UNION
+SELECT name FROM offline_customers;
+
+🎯 Practice Question
+
+Two tables:
+
+Table A → id
+1
+2
+
+Table B → id
+2
+3
+
+👉 What will be output of:
+
+SELECT id FROM A
+UNION
+SELECT id FROM B;
+
+
+Answer me 😎
