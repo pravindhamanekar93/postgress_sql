@@ -1,0 +1,185 @@
+✅ What is GROUP BY Clause?
+
+👉 GROUP BY is used to group rows that have the same values in specified columns.
+
+It is mostly used with:
+
+COUNT()
+
+SUM()
+
+AVG()
+
+MIN()
+
+MAX()
+
+🧠 Simple Meaning
+
+If you want to:
+
+Count employees department-wise
+
+Calculate total salary department-wise
+
+Find average marks student-wise
+
+You use GROUP BY.
+
+🧾 Syntax
+SELECT column_name, AGGREGATE_FUNCTION(column_name)
+FROM table_name
+GROUP BY column_name;
+
+🔥 Real World Example 1 — Company
+Table: employees
+id	name	dept	salary
+1	Ravi	IT	50000
+2	Priya	IT	60000
+3	John	HR	40000
+4	Meena	HR	45000
+5	Amit	Sales	70000
+
+🎯 Scenario 1: Count employees in each department
+SELECT dept, COUNT(*) AS total_employees
+FROM employees
+GROUP BY dept;
+
+Output:
+dept	total_employees
+IT	2
+HR	2
+Sales	1
+
+👉 It groups rows by department.
+
+🎯 Scenario 2: Total salary per department
+SELECT dept, SUM(salary) AS total_salary
+FROM employees
+GROUP BY dept;
+
+Output:
+dept	total_salary
+IT	110000
+HR	85000
+Sales	70000
+🎯 Scenario 3: Average salary per department
+SELECT dept, AVG(salary) AS avg_salary
+FROM employees
+GROUP BY dept;
+
+🔥 Real World Example 2 — E-Commerce
+Table: orders
+order_id	customer_id	amount
+1	101	500
+2	102	200
+3	101	700
+4	103	100
+5	101	300
+🎯 Find total amount spent by each customer
+SELECT customer_id, SUM(amount) AS total_spent
+FROM orders
+GROUP BY customer_id;
+
+⚠️ Important Rule of GROUP BY
+
+👉 Any column in SELECT must either:
+
+Be inside GROUP BY
+OR
+
+Be used inside aggregate function
+
+❌ Wrong:
+
+SELECT name, dept, SUM(salary)
+FROM employees
+GROUP BY dept;
+
+
+👉 ERROR (because name is not grouped)
+
+✅ Correct:
+
+SELECT dept, SUM(salary)
+FROM employees
+GROUP BY dept;
+
+🔥 Multiple Columns GROUP BY
+SELECT dept, salary, COUNT(*)
+FROM employees
+GROUP BY dept, salary;
+
+
+👉 Groups by combination of dept and salary.
+
+🧠 Execution Order (Very Important)
+
+SQL runs in this order:
+
+FROM
+
+WHERE
+
+GROUP BY
+
+HAVING
+
+SELECT
+
+ORDER BY
+
+💡 WHERE + GROUP BY Example
+
+👉 Find total salary of IT employees only
+
+SELECT dept, SUM(salary)
+FROM employees
+WHERE dept = 'IT'
+GROUP BY dept;
+
+🔥 GROUP BY vs DISTINCT
+GROUP BY	DISTINCT
+Used with aggregates	Removes duplicate rows
+Performs grouping	Just removes duplicates
+🎯 Real Corporate Use Cases
+
+GROUP BY is used in:
+
+Sales reports
+
+Banking analytics
+
+Attendance reports
+
+Customer purchase analysis
+
+Data dashboards
+
+Performance metrics
+
+🧠 Interview Questions
+Q1: Can we use GROUP BY without aggregate function?
+
+Yes ✅
+
+SELECT dept
+FROM employees
+GROUP BY dept;
+
+
+👉 Same as DISTINCT.
+
+Q2: Which clause runs first WHERE or GROUP BY?
+
+👉 WHERE runs first.
+
+🚀 Practice Question
+
+Table: sales
+
+product	amount
+A	100
+A	200
+B	50
+B	60
