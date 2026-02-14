@@ -1,0 +1,214 @@
+✅ What is a Subquery?
+
+👉 A subquery is a query written inside another query.
+
+It is also called:
+
+Inner query
+
+Nested query
+
+🧠 Simple Meaning
+
+It means:
+
+One query depends on the result of another query.
+
+🧾 Basic Syntax
+SELECT column
+FROM table
+WHERE column OPERATOR
+    (SELECT column FROM table WHERE condition);
+
+
+👉 The inner query runs first.
+👉 Then outer query uses its result.
+
+🔥 Example 1 — Single Row Subquery
+Table: employees
+id	name	salary
+1	Ravi	50000
+2	Priya	60000
+3	John	40000
+🎯 Find employees who earn more than average salary
+SELECT name, salary
+FROM employees
+WHERE salary >
+    (SELECT AVG(salary) FROM employees);
+
+Step-by-step:
+
+Inner query runs first:
+
+SELECT AVG(salary) FROM employees;
+
+
+Suppose average = 50000
+
+Then outer query becomes:
+
+SELECT name, salary
+FROM employees
+WHERE salary > 50000;
+
+
+👉 Output:
+
+name	salary
+Priya	60000
+🔥 Types of Subqueries
+
+There are 5 important types:
+
+1️⃣ Single-row subquery
+2️⃣ Multiple-row subquery
+3️⃣ Multiple-column subquery
+4️⃣ Correlated subquery
+5️⃣ Subquery in FROM clause
+
+1️⃣ Single Row Subquery
+
+Returns only one value.
+
+Example:
+
+SELECT * FROM employees
+WHERE salary =
+    (SELECT MAX(salary) FROM employees);
+
+
+👉 Finds highest paid employee.
+
+2️⃣ Multiple Row Subquery
+
+Returns multiple rows.
+
+We use:
+
+IN
+
+ANY
+
+ALL
+
+🔹 Example using IN
+Table: departments
+id	name
+1	IT
+2	HR
+Find employees working in IT or HR
+SELECT name
+FROM employees
+WHERE dept_id IN
+    (SELECT id FROM departments);
+
+🔹 Example using ANY
+SELECT name
+FROM employees
+WHERE salary > ANY
+    (SELECT salary FROM employees WHERE dept = 'HR');
+
+
+👉 Greater than at least one HR salary.
+
+🔹 Example using ALL
+SELECT name
+FROM employees
+WHERE salary > ALL
+    (SELECT salary FROM employees WHERE dept = 'HR');
+
+
+👉 Greater than all HR salaries.
+
+3️⃣ Multiple Column Subquery
+
+Returns more than one column.
+
+SELECT *
+FROM employees
+WHERE (dept, salary) IN
+    (SELECT dept, salary FROM managers);
+
+4️⃣ Correlated Subquery (Very Important 🔥)
+
+👉 Inner query depends on outer query.
+
+It runs once for each row.
+
+Example: Find employees earning more than department average
+SELECT name, salary, dept
+FROM employees e1
+WHERE salary >
+    (SELECT AVG(salary)
+     FROM employees e2
+     WHERE e1.dept = e2.dept);
+
+
+👉 For each employee, it calculates department average.
+
+5️⃣ Subquery in FROM Clause
+
+Used like a temporary table.
+
+SELECT dept, avg_salary
+FROM
+    (SELECT dept, AVG(salary) AS avg_salary
+     FROM employees
+     GROUP BY dept) AS dept_avg
+WHERE avg_salary > 50000;
+
+🔥 Real World Use Cases
+
+Subqueries are used in:
+
+Fraud detection
+
+Finding top performers
+
+Ranking systems
+
+Salary comparison
+
+Customer segmentation
+
+Reporting dashboards
+
+🧠 Subquery vs JOIN
+Subquery	JOIN
+Nested query	Combines tables
+Easier to read sometimes	Often faster
+Good for logic-based filtering	Good for relational data
+
+In real projects, JOIN is often more efficient.
+
+⚠️ Interview Traps
+
+Subquery runs first (usually).
+
+Correlated subquery runs multiple times.
+
+Performance can be slower than JOIN.
+
+🚀 Advanced Interview Question
+
+👉 Can we use subquery in SELECT?
+
+Yes ✅
+
+SELECT name,
+    (SELECT AVG(salary) FROM employees) AS avg_salary
+FROM employees;
+
+🎯 Practice Question for You
+
+Table: sales
+
+product	amount
+A	100
+A	200
+B	50
+B	60
+
+👉 Write a query to find products whose total sales are greater than overall average sales.
+
+Try it 😎
